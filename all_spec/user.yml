@@ -1,0 +1,59 @@
+openapi: 3.0.3
+info:
+  title: OOSA_USER_SERVICE
+  description: This is OOSA's User API
+  version: "1.0.0"
+
+
+paths:
+  /auth:
+    get:
+      summary: Authentication
+      description: Retrieve the authenticated user detail
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: User object
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/User'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+          users_id:
+            type: string
+          users_source:
+            type: integer
+            format: int32
+          users_name:
+            type: string
+          users_object:
+            type: string
+          users_avatar:
+            type: string
+          users_setting_language:
+            type: string
+          users_vis_events:
+            type: integer
+            format: int32
+          users_setting_vis_achievement_journal:
+            type: integer
+            format: int32
+          users_setting_vis_achievement_collab_log:
+            type: integer
+            format: int32
+          users_setting_vis_follow:
+            type: integer
+            format: int32
+          users_is_subscribed:
+            type: integer
+            format: int32
+          users_created_at:
+            type: string
+            format: int32

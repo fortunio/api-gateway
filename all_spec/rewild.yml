@@ -1,0 +1,45 @@
+openapi: 3.0.3
+info:
+  title: OOSA_REWILD_SERVICE
+  description: This is OOSA's Rewild API
+  version: "1.0.0"
+
+
+
+paths:
+  /rewilding:
+    get:
+      summary: Retrieve all rewilding spots
+      description: Retrieve rewilding spots in database
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: Array of Rewilding
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rewilding'
+components:
+  schemas:
+    Rewilding:
+      type: object
+      properties:
+        rewilding_id:
+          type: string
+        rewilding_type:
+          type: string
+        rewilding_city:
+          type: string
+        rewilding_area:
+          type: string
+        rewilding_name:
+          type: string
+        rewilding_rating:
+          type: number
+        rewilding_lat:
+          type: number
+        rewilding_lng:
+          type: number
