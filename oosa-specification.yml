@@ -50,7 +50,7 @@ paths:
       tags: 
         - Authentication
   /auth/line:
-    post:
+    get:
       summary: User login/register
       description: Use this endpoint to login/register using Line
       responses:
@@ -941,6 +941,29 @@ paths:
                 $ref: '#/components/schemas/ResponseGeneralSuccess'
       tags: 
         - Event Accounting
+  /my/event:
+    get:
+      summary: User Event
+      parameters:
+        - in: query
+          name: past
+          schema:
+            type: boolean
+          description: Pass true to retrieve past events by user. Otherwise omit this query parameter
+      description: Retrieve an authenticated user events
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: Array of EventReferenceLinks Object
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Events'
+      tags: 
+        - User Event
   /event-collaborate:
     get:
       summary: Event Collaborate
@@ -1212,6 +1235,44 @@ paths:
                 format: binary
       tags: 
         - Rewilding
+  /rewilding-search:
+    get:
+      summary: Search
+      description: Read a photo
+      parameters:
+        - name: lat
+          in: query
+          description: Latitude
+          schema:
+            type: string
+        - name: lng
+          in: query
+          description: Longitude
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: Activity type
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: Search by Text
+          schema:
+            type: string
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: Array of Rewilding Result from Google
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/RewildingSearch"
+      tags: 
+        - Rewilding Search
   /user-following:
     get:
       summary: Get user following
@@ -1485,11 +1546,17 @@ components:
           type: string
         events_date:
           type: string
+        events_deadline:
+          type: string
         events_name:
+          type: string
+        events_rewilding:
           type: string
         events_place:
           type: string
         events_type:
+          type: string
+        events_invitation_message:
           type: string
         events_payment_required:
           type: integer
@@ -1748,6 +1815,35 @@ components:
           type: string
         collaborative_log_created_at:
           type: string
+    RewildingSearch:
+      type: object
+      properties:
+        displayName:
+          type: object
+          properties:
+            languageCode:
+              type: string
+            text:
+              type: string
+        formattedAddress:
+          type: string
+        id:
+          type: string
+        location:
+          type: object
+          properties:
+            latitude:
+              type: number
+            longitude:
+              type: number
+        rating:
+          type: number
+        types:
+          type: array
+          items:
+            type: string
+        userRatingCount:
+          type: number
     RequestGoogleAuth:
       type: object
       properties:
@@ -1824,6 +1920,8 @@ components:
       type: object
       properties:
         event_reference_links_link:
+            type: string
+        event_reference_links_title:
             type: string
     RequestEventAlbumLinks:
       type: object
