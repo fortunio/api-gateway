@@ -13,7 +13,7 @@ steps:
   - echo hello world
   - openapi-cli ms --main main_spec.yml --mergeDir all_spec/ --output doc/oosa.yml
   - openapi-cli togs --spec doc/oosa.yml --output settings/endpoint.json
-  - docker build -t oosa-gw:dev .
+  - docker build --platform linux/amd64 -t oosa-gw:dev .
   when:
     branch:
     - dev
