@@ -8,11 +8,14 @@ platform:
   arch: amd64
 
 steps:
-- name: greeting
+- name: dev-build-docker-image
   commands:
   - echo hello world
   - openapi-cli ms --main main_spec.yml --mergeDir all_spec/ --output doc/oosa.yml
-  - openapi-cli togs --spec doc/oosa.yml --ouput settings/endpoint.json
+  - openapi-cli togs --spec doc/oosa.yml --output settings/endpoint.json
   - docker build -t oosa-gw:dev .
   - docker rmi -f $(docker images --filter "dangling=true" -q --no-trunc)
+  when:
+    branch:
+    - dev
 ...
