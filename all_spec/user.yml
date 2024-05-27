@@ -20,6 +20,180 @@ paths:
               schema:
                 type: object
                 $ref: '#/components/schemas/User'
+      tags: 
+        - Authentication
+  /auth/google:
+    post:
+      summary: User login/register
+      description: Use this endpoint to login/register using google
+      requestBody:
+        description: Pass in the value from Google's Login (We will use this value to get the user credentials)
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestGoogleAuth'
+      responses:
+        200:
+          description: Login object
+      tags: 
+        - Authentication
+  /auth/facebook:
+    post:
+      summary: User login/register
+      description: Use this endpoint to login/register using Facebook
+      responses:
+        200:
+          description: Login object
+      tags: 
+        - Authentication
+  /auth/line:
+    get:
+      summary: User login/register
+      description: Use this endpoint to login/register using Line
+      responses:
+        200:
+          description: Login object
+      tags: 
+        - Authentication
+  /auth/apple:
+    post:
+      summary: User login/register
+      description: Use this endpoint to login/register using Apple
+      responses:
+        200:
+          description: Login object
+      tags: 
+        - Authentication
+  /auth/email:
+    post:
+      summary: User login
+      description: Use this endpoint to login using email
+      requestBody:
+        description: Register emai object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestUserLoginEmail'
+      responses:
+        200:
+          description: Login object
+      tags: 
+        - Authentication
+  /register:
+    post:
+      summary: User register
+      description: Use this endpoint to register using email
+      requestBody:
+        description: Register emai object
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestUserRegisterEmail'
+      responses:
+        200:
+          description: Login object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGeneralSuccess'
+      tags: 
+        - Authentication
+  /user-following:
+    get:
+      summary: Get user following
+      description: Get user following
+      security:
+        - Bearer: []
+      responses:  
+        200:
+          description: User following
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserFollowings"
+      tags:
+        - User Following
+    post:
+      summary: Create user following
+      description: Create user following
+      security:
+        - Bearer: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestUserFollowing'
+      responses:  
+        200:
+          description: User following
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserFollowings"
+      tags:
+        - User Following
+  /user-following/{userFollowingId}:
+    get:
+      summary: Get user following
+      description: Get user following
+      parameters:
+        - name: userFollowingId
+          in: path
+          description: String ID of the user following
+          schema:
+            type: integer
+          required: true
+      security:
+        - Bearer: []
+      responses:  
+        200:
+          description: User following
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserFollowings"
+      tags:
+        - User Following
+    delete:
+      summary: Delete user following
+      description: Delete user following
+      parameters:
+        - name: userFollowingId
+          in: path
+          description: String ID of the user following
+          schema:
+            type: integer
+          required: true
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: Message
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGeneralSuccess'
+      tags: 
+        - User Following
+  /user/friends:
+    get:
+      summary: Get user friends
+      description: Get user friends
+      security:
+        - Bearer: []
+      responses:  
+        200:
+          description: User friends
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserFriends"
+      tags:
+        - User - Friends
 
 components:
   schemas:
@@ -57,3 +231,64 @@ components:
           users_created_at:
             type: string
             format: int32
+    UserFollowings:
+      type: object
+      properties:
+        user_followings_id:
+          type: string
+        user_followings_user:
+          type: string
+        user_followings_following:
+          type: string
+        user_followings_created_at:
+          type: string
+    UserFriends:
+      type: object
+      properties:
+          users_id:
+            type: string
+          users_name:
+            type: string
+          users_avatar:
+            type: string
+    RequestGoogleAuth:
+      type: object
+      properties:
+        credential:
+          type: string
+    RequestUserLoginEmail:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    RequestUserRegisterEmail:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    RequestUserFollowing:
+      type: object
+      properties:
+        user_followings_following:
+          type: string
+    ResponseGeneralSuccess:
+      type: object
+      properties:
+        message:
+          type: string
+    ResponseGeneralError:
+      type: object
+      properties:
+        message:
+          type: string
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      in: header
+      name: Bearer
