@@ -16,4 +16,4 @@ components:
     Bearer:
       type: apiKey
       in: header
-      name: Bearer
+      name: Authorization
