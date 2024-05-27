@@ -4,11 +4,11 @@ info:
   description: This is OOSA's API
   version: "1.0.0"
 servers:
-  - url: oosa_user:6080
+  - url: http://oosa_user:6080
     description: OOSA_USER_SERVICE
-  - url: oosa_rewild:6080
+  - url: http://oosa_rewild:6080
     description: OOSA_REWILD_SERVICE
-  - url: dev-api.oosa.life 
+  - url: https://dev-api.oosa.life 
     description: OOSA's Dev API
 
 components:
