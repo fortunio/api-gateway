@@ -13,6 +13,7 @@ steps:
   - openapi-cli ms --main main_spec.yml --mergeDir all_spec/ --output doc/oosa.yml
   - openapi-cli togs --spec doc/oosa.yml --output settings/endpoint.json
   - docker build --platform linux/amd64 -t oosa-gw:dev .
+  - restart_arwoosa.sh
   when:
     branch:
     - dev
