@@ -1214,6 +1214,15 @@ components:
           users_created_at:
             type: string
             format: int32
+    UserFriends:
+      type: object
+      properties:
+          users_id:
+            type: string
+          users_name:
+            type: string
+          users_avatar:
+            type: string
     UserMilestones:
       type: object
       properties:

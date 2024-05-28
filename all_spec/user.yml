@@ -60,6 +60,17 @@ paths:
   /auth/line:
     get:
       summary: User login/register
+      parameters:
+        - in: query
+          name: code
+          schema:
+            type: string
+          description: Code passed to line
+        - in: query
+          name: state
+          schema:
+            type: string
+          description: State passed to line
       description: Use this endpoint to login/register using Line
       responses:
         200:
