@@ -869,7 +869,7 @@ paths:
                   $ref: '#/components/schemas/Events'
       tags: 
         - User Event
-  /event-collaborate:
+  /collaborative-log:
     get:
       summary: Event Collaborate
       description: Retrieve events that has ended
@@ -886,7 +886,7 @@ paths:
                   $ref: '#/components/schemas/Events'
       tags: 
         - Event Collaborate
-  /event-collaborate/{eventId}:
+  /collaborative-log/{eventId}:
     get:
       summary: Event Collaborate
       description: Retrieve detail on event
@@ -908,7 +908,7 @@ paths:
                 $ref: '#/components/schemas/Events'
       tags: 
         - Event Collaborate
-  /event-collaborate/{eventId}/album-link:
+  /collaborative-log/{eventId}/album-link:
     get:
       summary: Event Collaborate
       description: Retrieve album link in event
@@ -958,7 +958,7 @@ paths:
                 $ref: '#/components/schemas/EventAlbumLink'
       tags: 
         - Event Collaborate
-  /event-collaborate/{eventId}/polaroid:
+  /collaborative-log/{eventId}/polaroid:
     get:
       summary: Event Polaroid
       description: Retrieve event polaroid
@@ -1010,6 +1010,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EventAlbumLink'
+      tags: 
+        - Event Collaborate
+  /collaborative-log/{eventId}/questionnaire:
+    post:
+      summary: Event Polaroid
+      description: Create event polaroid (Uploaded file will be uploaded on Flickr). Read location data and save to database
+      parameters:
+        - name: eventId
+          in: path
+          description: String ID of the event
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestCollaborativeLogQuestionnaire'
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: Event Object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Events'
       tags: 
         - Event Collaborate
   /rewilding:
@@ -1211,6 +1238,8 @@ components:
           users_is_subscribed:
             type: integer
             format: int32
+          users_is_business:
+            type: boolean
           users_created_at:
             type: string
             format: int32
@@ -1272,6 +1301,8 @@ components:
           type: string
         events_date:
           type: string
+        events_date_end:
+          type: string
         events_deadline:
           type: string
         events_name:
@@ -1284,15 +1315,23 @@ components:
           type: string
         events_invitation_message:
           type: string
+        events_participant_limit:
+          type: number
         events_payment_required:
           type: integer
         events_payment_fee:
           type: string
         events_requires_approval:
           type: integer
+        events_questionnaire_link:
+          type: string
         events_lat:
           type: number
         events_lng:
+          type: number
+        events_meeting_point_lat:
+          type: number
+        events_meeting_point_lng:
           type: number
         events_created_by:
           type: string
@@ -1587,6 +1626,10 @@ components:
       properties:
         events_date:
             type: string
+        events_date_end:
+            type: string
+        events_deadline:
+            type: string
         events_name:
             type: string
         events_place:
@@ -1598,12 +1641,18 @@ components:
             format: int32
         events_payment_fee:
             type: number
+        events_participant_limit:
+            type: number
         events_requires_approval:
             type: integer
             format: int32
         events_lat:
             type: number
         events_lng:
+            type: number
+        events_meeting_point_lat:
+            type: number
+        events_meeting_point_lng:
             type: number
     RequestEventInvitation:
       type: object
@@ -1685,6 +1734,11 @@ components:
           type: number
         rewilding_lng:
           type: number
+    RequestCollaborativeLogQuestionnaire:
+      type: object
+      properties:
+        events_questionnaire_link:
+          type: string
     ResponseGeneralSuccess:
       type: object
       properties:

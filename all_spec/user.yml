@@ -278,6 +278,8 @@ components:
           users_is_subscribed:
             type: integer
             format: int32
+          users_is_business:
+            type: boolean
           users_created_at:
             type: string
             format: int32
@@ -330,6 +332,8 @@ components:
           type: string
         password:
           type: string
+        is_business:
+          type: boolean
     RequestUserFollowing:
       type: object
       properties:
