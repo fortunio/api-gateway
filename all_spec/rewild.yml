@@ -1682,41 +1682,52 @@ components:
       properties:
         event_participants_user:
             type: string
+            default: 6613fae21977170d4fd608a6
     RequestEventMessageBoard:
       type: object
       properties:
         event_message_board_base_message:
             type: string
-        event_message_board_category:
-            type: string
+            default: Is there toilet there?
         event_message_board_announcement:
             type: string
+            default: Please arrive 30 minutes before event start time
     RequestEventAccounting:
       type: object
       properties:
         event_accounting_message:
             type: string
+            default: Entrance ticket
         event_accounting_amount:
             type: string
+            default: 20.50
     RequestEventSchedules:
       type: object
       properties:
         event_schedules_datetime:
-            type: string
+          type: string
+          default: 2024-03-31 15:20:00
+        event_schedules_description:
+          type: string
+          default: Gather#3
     RequestEventReferenceLinks:
       type: object
       properties:
         event_reference_links_link:
             type: string
+            default: https://google.com.sg
         event_reference_links_title:
             type: string
+            default: Google Singapore
     RequestEventAlbumLinks:
       type: object
       properties:
         event_album_link_album_url:
             type: string
+            default: https://photos.google.com
         event_album_link_visibility:
             type: string
+            default: 1
     RequestUserPreference:
       type: object
       properties:
@@ -1763,6 +1774,7 @@ components:
       properties:
         events_questionnaire_link:
           type: string
+          default: https://surveycake.com/12
     ResponseGeneralSuccess:
       type: object
       properties:
