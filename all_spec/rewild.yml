@@ -215,7 +215,7 @@ paths:
           in: path
           description: String ID of the user to get pocket list
           schema:
-            type: integer
+            type: string
           required: true
       security:
         - Bearer: []
@@ -316,13 +316,13 @@ paths:
           in: path
           description: String ID of the user to get pocket list
           schema:
-            type: integer
+            type: string
           required: true
         - name: pocketListItemsId
           in: path
           description: String ID of the user to get pocket list item
           schema:
-            type: integer
+            type: string
           required: true
       security:
         - Bearer: []
@@ -439,7 +439,7 @@ paths:
           in: path
           description: String ID of the event
           schema:
-            type: integer
+            type: string
           required: true
       security:
         - Bearer: []
@@ -510,7 +510,7 @@ paths:
           in: path
           description: String ID of the event
           schema:
-            type: integer
+            type: string
           required: true
       security:
         - Bearer: []
@@ -583,13 +583,13 @@ paths:
           in: path
           description: String ID of the event
           schema:
-            type: integer
+            type: string
           required: true
         - name: messageBoardId
           in: path
           description: String ID of the message
           schema:
-            type: integer
+            type: string
           required: true
       security:
         - Bearer: []
@@ -695,7 +695,7 @@ paths:
           in: path
           description: String ID of the event
           schema:
-            type: integer
+            type: string
           required: true
       security:
         - Bearer: []
@@ -766,7 +766,7 @@ paths:
           in: path
           description: String ID of the event
           schema:
-            type: integer
+            type: string
           required: true
       security:
         - Bearer: []
@@ -839,13 +839,13 @@ paths:
           in: path
           description: String ID of the event
           schema:
-            type: integer
+            type: string
           required: true
         - name: accountingId
           in: path
           description: String ID of the accounting record
           schema:
-            type: integer
+            type: string
           required: true
       security:
         - Bearer: []
