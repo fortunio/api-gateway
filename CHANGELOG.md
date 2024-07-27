@@ -1,3 +1,10 @@
+# CHANGELOG 1.1.2
+## Changes
+Changes in API Specifications
+- Rewilding
+- Pocket List
+- Removal of duplicated reference in favour for one GET /references 
+
 # CHANGELOG 1.1.1
 ## Changes
 Changes in API Specifications (checking)
