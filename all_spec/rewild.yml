@@ -68,8 +68,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PocketList'
-        204:
+        404:
           description: No pocket list found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGeneralError'
       tags: 
         - ✅ Pocket List
     put:
@@ -97,8 +101,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PocketList'
-        204:
+        404:
           description: No pocket list found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGeneralError'
       tags: 
         - ✅ Pocket List
     delete:
@@ -120,8 +128,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseGeneralSuccess'
-        204:
+        404:
           description: No pocket list found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGeneralError'
       tags: 
         - ✅ Pocket List
   /pocket-list/{pocketListId}/items:
@@ -147,8 +159,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PocketListItems'
-        204:
+        404:
           description: No pocket list found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGeneralError'
       tags: 
         - ✅ Pocket List
     post:
@@ -177,8 +193,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PocketListItems'
-        204:
+        404:
           description: No pocket list found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGeneralError'
       tags: 
         - ✅ Pocket List
   /pocket-list/{pocketListId}/items/{pocketListItemsId}:
@@ -207,8 +227,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PocketListItems'
-        204:
-          description: No pocket list found
+        404:
+          description: No pocket list items found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGeneralError'
       tags: 
         - ✅ Pocket List
     put:
@@ -243,8 +267,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseGeneralSuccess'
-        204:
+        404:
           description: No pocket list found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGeneralError'
       tags: 
         - ✅ Pocket List
     delete:
@@ -272,8 +300,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseGeneralSuccess'
-        204:
+        404:
           description: No pocket list found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseGeneralError'
       tags: 
         - ✅ Pocket List
   /event:
@@ -312,19 +344,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Events'
-      tags: 
-        - ✅ Event
-  /event/references:
-    get:
-      summary: Event
-      description: Event options
-      responses:
-        200:
-          description: New Event Object
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RewildingOptions'
       tags: 
         - ✅ Event
   /event/{eventId}:
@@ -1189,21 +1208,6 @@ paths:
                 $ref: '#/components/schemas/ResponseValidationError'
       tags: 
         - ✅ Rewilding
-  /rewilding/references:
-    get:
-      summary: Retrieve all options on rewilding types
-      description: Retrieve all options on rewilding types
-      security:
-        - Bearer: []
-      responses:
-        200:
-          description: Array of Rewilding Types
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/RewildingOptions'
-      tags: 
-        - ✅ Rewilding
   /rewilding/{rewildingId}:
     get:
       summary: Read a rewilding spot
@@ -1330,26 +1334,6 @@ paths:
                 $ref: "#/components/schemas/Rewilding"
       tags: 
         - Rewilding Register
-    post:
-      summary: Create rewilding register
-      description: Create rewilding register
-      requestBody:
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/RequestRewildingCreate'
-      security:
-        - Bearer: []
-      responses:
-        200:
-          description: Array of rewilding register objects
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Rewilding"
-      tags: 
-        - Rewilding Register
   /rewilding-register/references:
     get:
       summary: Rewilding register
@@ -1363,6 +1347,21 @@ paths:
                 $ref: '#/components/schemas/RewildingOptions'
       tags: 
         - Rewilding Register
+  /references:
+    get:
+      summary: Retrieve all options on rewilding/event types
+      description: Retrieve all options on rewilding/event types
+      security:
+        - Bearer: []
+      responses:
+        200:
+          description: Array of Rewilding Types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewildingOptions'
+      tags: 
+        - ✅ References
 components:
   schemas:
     User:
@@ -1479,7 +1478,7 @@ components:
         events_place:
           type: string
         events_city_id:
-          type: string
+          type: number
         events_invitation_message:
           type: string
         events_participant_limit:
@@ -1487,7 +1486,7 @@ components:
         events_payment_required:
           type: integer
         events_payment_fee:
-          type: string
+          type: number
         events_requires_approval:
           type: integer
         events_questionnaire_link:
@@ -1503,7 +1502,7 @@ components:
         events_statistic_time:
           type: number
         events_statistic_distance:
-          type: string
+          type: number
         events_statistic_member_count:
           type: number
         events_photo:
